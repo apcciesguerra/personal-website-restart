@@ -18,8 +18,9 @@
   
   <script lang="ts" setup>
   import { cn } from "../lib/utils";
-  import { ORBIT_DIRECTION, type Props } from "../index";
+  import { ORBIT_DIRECTION } from "../index";
   import { computed } from 'vue';
+  import type { Props } from "../index"; 
   
   const props = withDefaults(defineProps<Props>(), {
     direction: () => ORBIT_DIRECTION.Clockwise,

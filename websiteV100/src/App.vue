@@ -5,6 +5,7 @@ import ParticlesBg from './components/ParticlesBg.vue'
 import TextHighlight from './components/TextHighlight.vue'
 import Timeline from './components/Timeline.vue'
 import HyperText from './components/HyperText.vue'
+
 import Orbit from './components/Orbit.vue'
 import { ORBIT_DIRECTION } from './index'
 
