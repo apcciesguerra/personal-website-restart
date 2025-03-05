@@ -10,6 +10,7 @@
   
   <script setup lang="ts">
   import { useMouse, useDevicePixelRatio } from "@vueuse/core";
+  import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue'
   
   type Circle = {
     x: number;
