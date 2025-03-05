@@ -36,10 +36,12 @@ interface Props {
   });
   
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
-  const heightTransform = ref(useTransform(scrollYProgress, [0, 1], [0, 0]));
+  // Modify how heightTransform is calculated
+  let heightTransform = useTransform(scrollYProgress, [0, 1], [0, 0]);
   
   watch(height, (newHeight) => {
-    heightTransform.value = useTransform(scrollYProgress, [0, 1], [0, newHeight]);
+    // Adjust the transform range to ensure it goes all the way
+    heightTransform = useTransform(scrollYProgress, [0, 0.75], [0, newHeight]);
   });
 </script>
 
@@ -84,6 +86,23 @@ interface Props {
         </div>
         <slot :name="item.id"></slot>
       </div>
+      <div
+        :style="{
+          height: height + 'px',
+        }"
+        class="absolute left-8 top-0 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] md:left-8 dark:via-neutral-700"
+      >
+        <Motion
+          as="div"
+          :style="{
+            height: heightTransform,
+            opacity: opacityTransform,
+          }"
+          class="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-purple-500 from-0% via-blue-500 via-10% to-transparent"
+        >
+        </Motion>
+      </div>
+      
       <div
         :style="{
           height: height + 'px',
