@@ -14,3 +14,8 @@ import TextHighlight from './components/TextHighlight.vue';
     </h1>
   </div>
 </template>
+
+<style>
+@import './style.css';
+@import './output.css';
+</style>
