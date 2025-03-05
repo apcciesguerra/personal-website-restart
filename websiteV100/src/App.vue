@@ -135,19 +135,20 @@ useIntersectionObserver(introSection, ([{ isIntersecting }]) => {
       <div
         class="relative flex h-[500px] w-full max-w-3xl mx-auto flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl"
       >
-        <span class="pointer-events-none text-center text-8xl font-semibold leading-none"> 💻 </span>
+        <span class="pointer-events-none text-center text-8xl font-semibold leading-none"> ☀️ </span>
     <!-- Inner Circles -->
     <Orbit
-      class="size-[40px] items-center justify-center border-none bg-transparent"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
       :duration="20"
       :delay="20"
       :radius="80"
+      path
       :direction="ORBIT_DIRECTION.CounterClockwise"
     >
       <HtmlIcon />
     </Orbit>
     <Orbit
-      class="size-[40px] items-center justify-center border-none bg-transparent"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
       :duration="20"
       :delay="10"
       :radius="80"
@@ -158,34 +159,38 @@ useIntersectionObserver(introSection, ([{ isIntersecting }]) => {
     </Orbit>
     <!-- Outer Circles (reverse) -->
     <Orbit
-      class="size-[40px] items-center justify-center border-none bg-transparent"
-      :radius="190"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
+      :radius="205"
       :duration="20"
       path
     >
       <JavaScriptIcon />
     </Orbit>
     <Orbit
-      class="size-[40px] items-center justify-center border-none bg-transparent"
-      :radius="190"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
+      :radius="250"
       :duration="20"
       :delay="15"
+      path
       :direction="ORBIT_DIRECTION.CounterClockwise"
     >
       <PythonIcon />
     </Orbit>
     <Orbit
-      class="items-center justify-center border-none bg-transparent"
-      :radius="140"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
+      :radius="160"
       :delay="4"
+      path
+      :direction="ORBIT_DIRECTION.CounterClockwise"
     >
       <MySqlIcon />
     </Orbit>
     <Orbit
-      class="size-[40px] items-center justify-center border-none bg-transparent"
+      class="size-[50px] items-center justify-center border-none bg-transparent"
       :radius="120"
-      :duration="25"
+      :duration="15"
       :delay="10"
+      path
     >
       <VueIcon />
     </Orbit>
@@ -201,3 +206,113 @@ html {
   scroll-behavior: smooth;
 }
 </style>
+<!-- More About Me Section -->
+<div class="py-20 min-h-screen flex flex-col items-center justify-center">
+  <HyperText
+    text="More About Me"
+    class="text-4xl font-bold mb-16"
+    :duration="2000"
+  />
+  
+  <div class="text-center max-w-2xl mx-auto space-y-12">
+    <div class="text-xl">
+      I used to play video games a lot.
+      <br/>
+      Like, <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">a lot</TextHighlight>.
+      <HyperText text="a lot." :duration="1500" />
+    </div>
+    
+    <div class="text-xl mt-8">
+      There was even a time I chased being an eSports Professional
+    </div>
+    
+    <div class="space-y-4 mt-8">
+      <p class="text-lg">
+        Counter-Strike <span class="font-bold">3,270</span> hours played
+      </p>
+      <p class="text-lg">
+        Valorant <span class="font-bold">985</span> hours played
+      </p>
+      <p class="text-lg">
+        Aimlabs <span class="font-bold">525</span> hours played
+      </p>
+    </div>
+    
+    <div 
+      class="mt-16 transition-all duration-1000 transform"
+      v-motion
+      :initial="{ opacity: 0, y: 100 }"
+      :visible="{ opacity: 1, y: 0 }"
+      :delay="300"
+    >
+      <p class="text-xl">
+        Nowadays, I'm just <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">pretty chill</TextHighlight> and play games for <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">fun</TextHighlight>
+      </p>
+      
+      <div class="space-y-4 mt-8">
+        <p class="text-lg">
+          Team Fortress 2 <span class="font-bold">1,011</span> hours played
+        </p>
+        <p class="text-lg">
+          Deadlock <span class="font-bold">269</span> hours played
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Goals Section -->
+<div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80">
+  <HyperText
+    text="Goals"
+    class="text-4xl font-bold mb-16"
+    :duration="2000"
+  />
+  
+  <div class="container mx-auto px-4">
+    <!-- Content placeholder for future goals components -->
+    <div class="h-[400px] border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
+      <p class="text-foreground/50">Goals content will be placed here</p>
+    </div>
+  </div>
+</div>
+
+<!-- Gallery Section -->
+<div class="py-20 min-h-screen flex flex-col items-center justify-center">
+  <HyperText
+    text="Gallery"
+    class="text-4xl font-bold mb-16"
+    :duration="2000"
+  />
+  
+  <div class="container mx-auto px-4">
+    <!-- Content placeholder for future gallery components -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
+        <p class="text-foreground/50">Image 1</p>
+      </div>
+      <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
+        <p class="text-foreground/50">Image 2</p>
+      </div>
+      <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
+        <p class="text-foreground/50">Image 3</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Last Page Section -->
+<div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80">
+  <HyperText
+    text="Last Page"
+    class="text-4xl font-bold mb-16"
+    :duration="2000"
+  />
+  
+  <div class="container mx-auto px-4 max-w-3xl">
+    <!-- Content placeholder for future last page components -->
+    <div class="h-[400px] border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
+      <p class="text-foreground/50">Last page content will be placed here</p>
+    </div>
+  </div>
+</div>

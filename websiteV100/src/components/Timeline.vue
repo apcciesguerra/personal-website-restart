@@ -41,7 +41,7 @@ interface Props {
   
   watch(height, (newHeight) => {
     // Adjust the transform range to ensure it goes all the way
-    heightTransform = useTransform(scrollYProgress, [0, 0.75], [0, newHeight]);
+    heightTransform = useTransform(scrollYProgress, [0, 0.8], [0, newHeight]);
   });
 </script>
 
