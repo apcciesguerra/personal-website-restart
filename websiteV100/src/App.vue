@@ -8,6 +8,8 @@ import HyperText from './components/HyperText.vue'
 import NumberTicker from './components/NumberTicker.vue'
 import BlurReveal from './components/BlurReveal.vue'
 import ExpandableGallery from './components/ExpandableGallery.vue'
+import VanishingInput from './components/VanishingInput.vue'
+import RotatingPlaceholderInput from './components/RotatingPlaceholderInput.vue'
 
 // Import images from assets folder
 import photo1 from './assets/images/photo1.jpg'
@@ -15,6 +17,27 @@ import photo2 from './assets/images/photo2.jpg'
 import photo3 from './assets/images/photo3.jpg'
 import photo4 from './assets/images/photo4.jpg'
 import photo5 from './assets/images/photo5.jpg'
+
+// Last page text input
+const lastPageText = ref("");
+const visitorName = ref("");
+const namePlaceholders = [
+  "TEST",
+  "Code wizard's name",
+  "Future tech innovator",
+  "Digital explorer",
+  "Pixel perfectionist",
+  "Web wanderer",
+  "Curious visitor",
+  "Fellow developer"
+];
+const lastPagePlaceholders = [
+  "Why is my code always broken?",
+  "What does 'undefined' even mean?",
+  "How to center a div (for real this time)",
+  "Am I smarter than a compiler?",
+  "Do loops ever get dizzy?",
+];
 
 import Orbit from './components/Orbit.vue'
 import { ORBIT_DIRECTION } from './index'
@@ -76,6 +99,24 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
 }, {
   threshold: 0.2
 })
+
+// Rotate name placeholders
+let nameIntervalId: number | null = null;
+
+onMounted(() => {
+  // Start rotating name placeholders
+  nameIntervalId = window.setInterval(() => {
+    currentNamePlaceholder.value = (currentNamePlaceholder.value + 1) % namePlaceholders.length;
+  }, 4500); // Match the same interval as VanishingInput for consistency
+});
+
+onUnmounted(() => {
+  // Clear interval when component is unmounted
+  if (nameIntervalId !== null) {
+    clearInterval(nameIntervalId);
+  }
+});
+
 </script>
 
 <template>
@@ -371,16 +412,24 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
 
     <!-- Last Page Section -->
     <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80">
-      <HyperText
-        text="Last Page"
-        class="text-4xl font-bold mb-16"
-        :duration="2000"
-      />
-      
       <div class="container mx-auto px-4 max-w-3xl">
-        <!-- Content placeholder for future last page components -->
-        <div class="h-[400px] border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
-          <p class="text-foreground/50">Last page content will be placed here</p>
+        <div class="flex h-[40rem] flex-col items-center justify-center px-4">
+          <h2 class="mb-10 text-center text-xl text-black sm:mb-20 sm:text-5xl dark:text-white">
+            How'd you like my website?
+          </h2>
+          
+          <!-- Name Input Field -->
+          <div class="w-full max-w-xl mb-6">
+            <RotatingPlaceholderInput
+              v-model="visitorName"
+              :placeholders="namePlaceholders"
+            />
+          </div>
+          
+          <VanishingInput
+            v-model="lastPageText"
+            :placeholders="lastPagePlaceholders"
+          />
         </div>
       </div>
     </div>
