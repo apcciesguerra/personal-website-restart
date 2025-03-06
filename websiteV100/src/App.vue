@@ -532,15 +532,21 @@ async function submitFeedback() {
     </div>
     
     <!-- Last Page Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
+    <div class="py-32 min-h-screen flex flex-col items-center justify-center relative z-10">
+      <HyperText
+        text="Feedback"
+        class="text-5xl font-bold mb-24"
+        :duration="2000"
+      />
+      
       <div class="container mx-auto px-4 max-w-3xl">
-        <div class="flex h-[40rem] flex-col items-center justify-center px-4">
-          <h2 class="mb-10 text-center text-xl text-black sm:mb-20 sm:text-5xl dark:text-white">
+        <div class="flex flex-col items-center justify-center px-4 mb-40">
+          <h2 class="mb-24 text-center text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent leading-relaxed py-2">
             How'd you like my website?
           </h2>
           
           <!-- Form with submission status -->
-          <form @submit.prevent="submitFeedback" class="w-full max-w-xl backdrop-blur-sm bg-white/10 dark:bg-black/10 p-8 rounded-xl shadow-lg">
+          <form @submit.prevent="submitFeedback" class="w-full max-w-xl backdrop-blur-sm bg-white/5 dark:bg-black/10 p-8 rounded-xl shadow-lg">
             <!-- Name Input Field -->
             <div class="w-full max-w-xl mb-6">
               <RotatingPlaceholderInput
@@ -549,16 +555,17 @@ async function submitFeedback() {
               />
             </div>
             
+            <!-- Rest of the form remains unchanged -->
             <VanishingInput
               v-model="lastPageText"
               :placeholders="lastPagePlaceholders"
             />
             
             <!-- Submit button -->
-            <div class="mt-6 flex flex-col items-center">
+            <div class="mt-8 flex flex-col items-center">
               <button 
                 type="submit" 
-                class="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300"
+                class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300 shadow-md"
                 :disabled="isSubmitting"
               >
                 {{ isSubmitting ? 'Sending...' : 'Send Feedback' }}
@@ -577,8 +584,8 @@ async function submitFeedback() {
         </div>
         
         <!-- Link Preview Section -->
-        <div class="flex h-[40rem] flex-col items-center justify-center px-4">
-          <p class="mx-auto mb-10 max-w-3xl text-xl text-neutral-500 md:text-3xl dark:text-neutral-400">
+        <div class="flex flex-col items-center justify-center px-4 mt-16">
+          <p class="mx-auto mb-10 max-w-3xl text-2xl md:text-4xl leading-relaxed text-center">
             Links to my 
             <LinkPreview
               url="https://github.com/apcciesguerra"
@@ -608,7 +615,7 @@ async function submitFeedback() {
         <div class="flex h-auto items-center justify-center max-lg:w-full min-md:flex-1">
           <TextHoverEffect
             class="w-[200%] min-lg:min-h-64"
-            text="powered"
+            text="vercel"
           />
         </div>
 

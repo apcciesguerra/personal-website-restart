@@ -9,7 +9,7 @@
           :key="i"
           as="span"
           :class="cn(letter === ' ' ? 'w-3' : '', $props.class)"
-          class="inline-block font-mono"
+          class="inline-block"
           :initial="{ opacity: 0, y: -10 }"
           :animate="{ opacity: 1, y: 0 }"
           :delay="i * (duration / (text.length * 10))"
