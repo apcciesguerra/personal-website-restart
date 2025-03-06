@@ -26,42 +26,6 @@
         @keydown.enter="handleKeyDown"
       />
   
-      <!-- Submit Button -->
-      <button
-        :disabled="!vanishingText"
-        type="submit"
-        class="absolute right-2 top-1/2 z-50 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-black transition duration-200 disabled:bg-gray-100 dark:bg-zinc-900 dark:disabled:bg-zinc-700"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4 text-gray-300"
-        >
-          <path
-            stroke="none"
-            d="M0 0h24v24H0z"
-            fill="none"
-          />
-          <path
-            d="M5 12l14 0"
-            :style="{
-              strokeDasharray: '50%',
-              strokeDashoffset: vanishingText ? '0' : '50%',
-              transition: 'stroke-dashoffset 0.3s linear',
-            }"
-          />
-          <path d="M13 18l6 -6" />
-          <path d="M13 6l6 6" />
-        </svg>
-      </button>
-  
       <!-- Placeholder Text -->
       <div class="pointer-events-none absolute inset-0 flex items-center rounded-full">
         <Transition

@@ -11,6 +11,7 @@ import ExpandableGallery from './components/ExpandableGallery.vue'
 import VanishingInput from './components/VanishingInput.vue'
 import RotatingPlaceholderInput from './components/RotatingPlaceholderInput.vue'
 import LinkPreview from './components/LinkPreview.vue'
+import { supabase } from './lib/supabase'
 
 // Import images from assets folder
 import photo1 from './assets/images/photo1.jpg'
@@ -134,7 +135,68 @@ onUnmounted(() => {
     clearInterval(nameIntervalId);
   }
 });
+// Form submission state
+const isSubmitting = ref(false);
+const submissionStatus = ref('');
+const isError = ref(false);
 
+// Function to submit feedback to Supabase
+async function submitFeedback() {
+  if (isSubmitting.value) return;
+  
+  if (!visitorName.value || !lastPageText.value) {
+    submissionStatus.value = "Please fill in both fields";
+    isError.value = true;
+    return;
+  }
+  
+  isSubmitting.value = true;
+  submissionStatus.value = 'Submitting...';
+  isError.value = false;
+  
+  try {
+    console.log('Submitting feedback with data:', {
+      name: visitorName.value,
+      comments: lastPageText.value,
+      important: true
+    });
+    
+    // Submit to Supabase
+    const { data, error } = await supabase
+      .from('comments')
+      .insert([
+        { 
+          name: visitorName.value, 
+          comments: lastPageText.value,
+          important: true
+        }
+      ]);
+      
+    if (error) {
+      console.error('Error submitting feedback:', error);
+      throw error;
+    }
+    
+    console.log('Submission successful:', data);
+    submissionStatus.value = 'Thank you for your feedback!';
+    
+    // Reset form
+    visitorName.value = "";
+    lastPageText.value = "";
+    
+  } catch (error) {
+    console.error('Failed to submit feedback:', error);
+    isError.value = true;
+    submissionStatus.value = `Error: ${error.message || 'Failed to submit feedback'}`;
+  } finally {
+    isSubmitting.value = false;
+    
+    // Clear status message after 5 seconds
+    setTimeout(() => {
+      submissionStatus.value = '';
+    }, 5000);
+  }
+}
 </script>
 
 <template>
@@ -434,18 +496,41 @@ onUnmounted(() => {
             How'd you like my website?
           </h2>
           
-          <!-- Name Input Field -->
-          <div class="w-full max-w-xl mb-6">
-            <RotatingPlaceholderInput
-              v-model="visitorName"
-              :placeholders="namePlaceholders"
+          <!-- Form with submission status -->
+          <form @submit.prevent="submitFeedback" class="w-full max-w-xl">
+            <!-- Name Input Field -->
+            <div class="w-full max-w-xl mb-6">
+              <RotatingPlaceholderInput
+                v-model="visitorName"
+                :placeholders="namePlaceholders"
+              />
+            </div>
+            
+            <VanishingInput
+              v-model="lastPageText"
+              :placeholders="lastPagePlaceholders"
             />
-          </div>
-          
-          <VanishingInput
-            v-model="lastPageText"
-            :placeholders="lastPagePlaceholders"
-          />
+            
+            <!-- Submit button -->
+            <div class="mt-6 flex flex-col items-center">
+              <button 
+                type="submit" 
+                class="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity"
+                :disabled="isSubmitting"
+              >
+                {{ isSubmitting ? 'Sending...' : 'Send Feedback' }}
+              </button>
+              
+              <!-- Status message -->
+              <div 
+                v-if="submissionStatus" 
+                class="mt-4 text-center transition-opacity duration-300"
+                :class="isError ? 'text-red-500 dark:text-red-400' : 'text-green-500 dark:text-green-400'"
+              >
+                {{ submissionStatus }}
+              </div>
+            </div>
+          </form>
         </div>
         
         <!-- Link Preview Section -->
