@@ -200,29 +200,31 @@ async function submitFeedback() {
 </script>
 
 <template>
-  <main class="min-h-screen w-full">
-    <!-- Hero Section with Particles -->
+  <main class="min-h-screen w-full relative overflow-x-hidden">
+    <!-- Particles background that spans the entire page -->
+    <ParticlesBg
+      class="fixed inset-0 z-0"
+      :quantity="100"
+      :ease="100"
+      :color="isDark ? '#FFF' : '#000'"
+      :staticity="10"
+    />
+    
+    <!-- Hero Section -->
     <div
-      class="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background"
+      class="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden"
     >
       <span
         class="pointer-events-none relative z-10 whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10"
       >
         Welcome To My Website
       </span>
-      <ParticlesBg
-        class="absolute inset-0"
-        :quantity="100"
-        :ease="100"
-        :color="isDark ? '#FFF' : '#000'"
-        :staticity="10"
-      />
     </div>
 
     <!-- Introduction Section -->
     <div
       ref="introSection"
-      class="relative flex min-h-screen w-full flex-col items-center justify-center"
+      class="relative flex min-h-screen w-full flex-col items-center justify-center z-10"
     >
       <div 
         class="transition-all duration-1000"
@@ -247,7 +249,7 @@ async function submitFeedback() {
     </div>
     
     <!-- Timeline Section -->
-    <div class="h-fit w-full">
+    <div class="h-fit w-full relative z-10 py-20">
       <Timeline
         :items="data"
       >
@@ -271,7 +273,7 @@ async function submitFeedback() {
     </div>
 
     <!-- HyperText and Orbit Section -->
-    <div class="py-20 flex flex-col items-center justify-center space-y-12">
+    <div class="py-20 flex flex-col items-center justify-center space-y-12 relative z-10">
       <HyperText
         text="IT Experience"
         class="text-4xl font-bold"
@@ -344,7 +346,7 @@ async function submitFeedback() {
     </div>
 
     <!-- More About Me Section -->
-    <div ref="aboutMeSection" class="py-20 min-h-screen flex flex-col items-center justify-center">
+    <div ref="aboutMeSection" class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <HyperText
         text="More About Me"
         class="text-4xl font-bold mb-16"
@@ -430,7 +432,7 @@ async function submitFeedback() {
     </div>
 
     <!-- Goals Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80 relative">
+    <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <HyperText
         text="Goals"
         class="text-4xl font-bold mb-16"
@@ -473,7 +475,7 @@ async function submitFeedback() {
     </div>
 
     <!-- Picture Gallery Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80 relative">
+    <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <HyperText
         text="Picture Gallery"
         class="text-4xl font-bold mb-16"
@@ -489,7 +491,7 @@ async function submitFeedback() {
     </div>
 
     <!-- Last Page Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80">
+    <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <div class="container mx-auto px-4 max-w-3xl">
         <div class="flex h-[40rem] flex-col items-center justify-center px-4">
           <h2 class="mb-10 text-center text-xl text-black sm:mb-20 sm:text-5xl dark:text-white">
@@ -497,7 +499,7 @@ async function submitFeedback() {
           </h2>
           
           <!-- Form with submission status -->
-          <form @submit.prevent="submitFeedback" class="w-full max-w-xl">
+          <form @submit.prevent="submitFeedback" class="w-full max-w-xl backdrop-blur-sm bg-white/10 dark:bg-black/10 p-8 rounded-xl shadow-lg">
             <!-- Name Input Field -->
             <div class="w-full max-w-xl mb-6">
               <RotatingPlaceholderInput
@@ -515,7 +517,7 @@ async function submitFeedback() {
             <div class="mt-6 flex flex-col items-center">
               <button 
                 type="submit" 
-                class="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity"
+                class="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300"
                 :disabled="isSubmitting"
               >
                 {{ isSubmitting ? 'Sending...' : 'Send Feedback' }}
