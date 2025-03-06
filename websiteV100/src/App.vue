@@ -49,10 +49,22 @@ import MySqlIcon from './components/icons/MySql_Icon.vue'
 import VueIcon from './components/icons/Vue_Icon.vue'
 
 const isDark = computed(() => useColorMode().value === "dark")
+
+// Add refs for all sections that need delayed TextHighlight effects
 const introSection = ref<HTMLElement | null>(null)
 const isIntroVisible = ref(false)
 const aboutMeSection = ref<HTMLElement | null>(null)
 const isAboutMeVisible = ref(false)
+const journeySection = ref<HTMLElement | null>(null)
+const isJourneyVisible = ref(false)
+const experienceSection = ref<HTMLElement | null>(null)
+const isExperienceVisible = ref(false)
+const goalsSection = ref<HTMLElement | null>(null)
+const isGoalsVisible = ref(false)
+const gallerySection = ref<HTMLElement | null>(null)
+const isGalleryVisible = ref(false)
+const feedbackSection = ref<HTMLElement | null>(null)
+const isFeedbackVisible = ref(false)
 
 // Gallery images
 const galleryImages = [
@@ -95,7 +107,6 @@ const timelineHeadings = [
   "Graduated Senior Highschool",
   "Present Day!"
 ];
-
 const timelineDescriptions = [
   "First introduction to coding via HTML in 7th Grade",
   "Learned basics of HTML & CSS for 4 years (7th-10th Grade)",
@@ -103,19 +114,27 @@ const timelineDescriptions = [
   "Finished Senior High with more knowledge in coding",
   "Currently in my 2nd year in Computer Science"
 ];
-
 useIntersectionObserver(introSection, ([{ isIntersecting }]) => {
   isIntroVisible.value = isIntersecting
-}, {
-  threshold: 0.2
-})
-
+}, { threshold: 0.2 })
 useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
   isAboutMeVisible.value = isIntersecting
-}, {
-  threshold: 0.2
-})
-
+}, { threshold: 0.2 })
+useIntersectionObserver(journeySection, ([{ isIntersecting }]) => {
+  isJourneyVisible.value = isIntersecting
+}, { threshold: 0.2 })
+useIntersectionObserver(experienceSection, ([{ isIntersecting }]) => {
+  isExperienceVisible.value = isIntersecting
+}, { threshold: 0.2 })
+useIntersectionObserver(goalsSection, ([{ isIntersecting }]) => {
+  isGoalsVisible.value = isIntersecting
+}, { threshold: 0.2 })
+useIntersectionObserver(gallerySection, ([{ isIntersecting }]) => {
+  isGalleryVisible.value = isIntersecting
+}, { threshold: 0.2 })
+useIntersectionObserver(feedbackSection, ([{ isIntersecting }]) => {
+  isFeedbackVisible.value = isIntersecting
+}, { threshold: 0.2 })
 // Rotate name placeholders
 let nameIntervalId: number | null = null;
 
@@ -233,21 +252,33 @@ async function submitFeedback() {
       >
         <h1 class="text-balance text-center text-5xl md:text-6xl font-bold leading-relaxed">
           Hi, I'm 
-          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
+          <TextHighlight 
+            v-if="isIntroVisible" 
+            class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1 transition-all duration-700"
+          >
             Christian
           </TextHighlight>
+          <span v-else class="px-2 py-1">Christian</span>
           Luis Esguerra
           <div class="my-6">
             a 
-            <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
+            <TextHighlight 
+              v-if="isIntroVisible" 
+              class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1 transition-all duration-700"
+            >
               2nd Year College Student
             </TextHighlight>
+            <span v-else class="px-2 py-1">2nd Year College Student</span>
           </div>
           <div class="my-6">
             currently studying BS
-            <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
+            <TextHighlight 
+              v-if="isIntroVisible" 
+              class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1 transition-all duration-700"
+            >
               Computer Science
             </TextHighlight>
+            <span v-else class="px-2 py-1">Computer Science</span>
           </div>
         </h1>
       </div>
