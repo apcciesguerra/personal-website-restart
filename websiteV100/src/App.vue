@@ -85,6 +85,23 @@ const data = [
   },
 ];
 
+// Timeline content
+const timelineHeadings = [
+  "Started Learning Programming",
+  "First Web Development Project",
+  "Began College Journey",
+  "Expanded Technical Skills",
+  "Future Goals"
+];
+
+const timelineDescriptions = [
+  "My first introduction to programming with basic HTML and CSS. Started building simple websites and discovered my passion for coding.",
+  "Created my first complete web project using JavaScript and began exploring frameworks. Started understanding the fundamentals of web development.",
+  "Enrolled in Computer Science program and deepened my knowledge of programming concepts, data structures, and algorithms.",
+  "Expanded my skillset with Vue.js, Python, and database technologies. Started working on more complex projects and applications.",
+  "Planning to graduate and launch my career as a full-stack developer with expertise in modern web technologies and frameworks."
+];
+
 useIntersectionObserver(introSection, ([{ isIntersecting }]) => {
   isIntroVisible.value = isIntersecting
 }, {
@@ -171,10 +188,8 @@ onUnmounted(() => {
     <div class="h-fit w-full">
       <Timeline
         :items="data"
-        title="Beam me up"
-        description="Show the timeline in style"
       >
-        <template
+      <template
           v-for="(item, index) in data"
           :key="item.id + 'template'"
           #[item.id]
@@ -183,11 +198,11 @@ onUnmounted(() => {
             <h3
               class="mb-4 block text-left text-2xl font-bold text-neutral-500 dark:text-neutral-500"
             >
-              {{ `Section ${index + 1}` }}
+              {{ timelineHeadings[index] }}
             </h3>
           </div>
           <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            Inspira UI gives you the freedom to design awesome website, in less time.
+            {{ timelineDescriptions[index] }}
           </p>
         </template>
       </Timeline>
