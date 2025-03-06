@@ -22,8 +22,8 @@ import photo5 from './assets/images/photo5.jpg'
 const lastPageText = ref("");
 const visitorName = ref("");
 const namePlaceholders = [
-  "TEST",
-  "Code wizard's name",
+  "Your awesome name here",
+  "John Doe",
   "Future tech innovator",
   "Digital explorer",
   "Pixel perfectionist",
@@ -104,10 +104,13 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
 let nameIntervalId: number | null = null;
 
 onMounted(() => {
+  // Ensure the page starts at the top when loaded
+  window.scrollTo(0, 0);
+  
   // Start rotating name placeholders
   nameIntervalId = window.setInterval(() => {
     currentNamePlaceholder.value = (currentNamePlaceholder.value + 1) % namePlaceholders.length;
-  }, 4500); // Match the same interval as VanishingInput for consistency
+  }, 4500);
 });
 
 onUnmounted(() => {
