@@ -160,6 +160,53 @@ const isSubmitting = ref(false);
 const submissionStatus = ref('');
 const isError = ref(false);
 
+// Guestbook state
+const showGuestbook = ref(false);
+const comments = ref([]);
+const isLoadingComments = ref(false);
+
+// Toggle guestbook visibility
+function toggleGuestbook() {
+  showGuestbook.value = !showGuestbook.value;
+  
+  if (showGuestbook.value) {
+    fetchComments();
+  }
+}
+
+// Format date for display
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+}
+
+// Fetch comments from Supabase
+async function fetchComments() {
+  isLoadingComments.value = true;
+  
+  try {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*')
+      .order('created_at', { ascending: false });
+      
+    if (error) {
+      console.error('Error fetching comments:', error);
+      throw error;
+    }
+    
+    comments.value = data;
+  } catch (error) {
+    console.error('Failed to fetch comments:', error);
+  } finally {
+    isLoadingComments.value = false;
+  }
+}
+
 // Function to submit feedback to Supabase
 async function submitFeedback() {
   if (isSubmitting.value) return;
@@ -203,6 +250,11 @@ async function submitFeedback() {
     // Reset form
     visitorName.value = "";
     lastPageText.value = "";
+    
+    // Refresh comments if guestbook is open
+    if (showGuestbook.value) {
+      fetchComments();
+    }
     
   } catch (error) {
     console.error('Failed to submit feedback:', error);
@@ -601,7 +653,6 @@ async function submitFeedback() {
               >
                 {{ isSubmitting ? 'Sending...' : 'Send Feedback' }}
               </button>
-              
               <!-- Status message -->
               <div 
                 v-if="submissionStatus" 
@@ -612,6 +663,71 @@ async function submitFeedback() {
               </div>
             </div>
           </form>
+        </div>
+        
+        <!-- Guestbook Button - Add this -->
+        <div class="mt-16 flex justify-center">
+          <button 
+            @click="toggleGuestbook" 
+            class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300 shadow-md flex items-center gap-2"
+          >
+            <span class="text-xl">✍️</span>
+            <span>View Guestbook</span>
+          </button>
+        </div>
+        
+        <!-- Guestbook Modal - Add this -->
+        <div 
+          v-if="showGuestbook" 
+          class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          @click.self="toggleGuestbook"
+        >
+          <div 
+            class="bg-white/10 dark:bg-black/30 backdrop-blur-lg rounded-xl shadow-xl w-full max-w-3xl max-h-[80vh] overflow-hidden flex flex-col transition-all duration-300 transform"
+            :class="showGuestbook ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
+          >
+            <!-- Guestbook Header -->
+            <div class="p-6 border-b border-white/10 flex justify-between items-center">
+              <h3 class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                Visitor Guestbook
+              </h3>
+              <button 
+                @click="toggleGuestbook" 
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <!-- Guestbook Content -->
+            <div class="overflow-y-auto p-6 flex-1">
+              <div v-if="isLoadingComments" class="flex justify-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+              </div>
+              
+              <div v-else-if="comments.length === 0" class="text-center py-12 text-gray-400">
+                No comments yet. Be the first to leave feedback!
+              </div>
+              
+              <div v-else class="space-y-6">
+                <div 
+                  v-for="comment in comments" 
+                  :key="comment.id" 
+                  class="p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300"
+                >
+                  <div class="flex justify-between items-start">
+                    <h4 class="font-bold text-lg bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
+                      {{ comment.name }}
+                    </h4>
+                    <span class="text-xs text-gray-400">
+                      {{ formatDate(comment.created_at) }}
+                    </span>
+                  </div>
+                  <p class="mt-2 text-white/90 dark:text-white/80">{{ comment.comments }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <!-- Link Preview Section -->
@@ -653,7 +769,6 @@ async function submitFeedback() {
         </div>
       </div>
     </div>
-
     </div>
   </main>
 </template>
