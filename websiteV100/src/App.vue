@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { useColorMode, useIntersectionObserver } from '@vueuse/core'
 import ParticlesBg from './components/ParticlesBg.vue'
 import TextHighlight from './components/TextHighlight.vue'
@@ -7,6 +7,14 @@ import Timeline from './components/Timeline.vue'
 import HyperText from './components/HyperText.vue'
 import NumberTicker from './components/NumberTicker.vue'
 import BlurReveal from './components/BlurReveal.vue'
+import ExpandableGallery from './components/ExpandableGallery.vue'
+
+// Import images from assets folder
+import photo1 from './assets/images/photo1.jpg'
+import photo2 from './assets/images/photo2.jpg'
+import photo3 from './assets/images/photo3.jpg'
+import photo4 from './assets/images/photo4.jpg'
+import photo5 from './assets/images/photo5.jpg'
 
 import Orbit from './components/Orbit.vue'
 import { ORBIT_DIRECTION } from './index'
@@ -23,6 +31,15 @@ const introSection = ref<HTMLElement | null>(null)
 const isIntroVisible = ref(false)
 const aboutMeSection = ref<HTMLElement | null>(null)
 const isAboutMeVisible = ref(false)
+
+// Gallery images
+const galleryImages = [
+  photo1,
+  photo2,
+  photo3,
+  photo4,
+  photo5
+];
 
 // Timeline data
 const data = [
@@ -294,7 +311,7 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
     </div>
 
     <!-- Goals Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80">
+    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80 relative">
       <HyperText
         text="Goals"
         class="text-4xl font-bold mb-16"
@@ -302,7 +319,7 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
       />
       
       <div class="container mx-auto px-4">
-        <BlurReveal class="space-y-6 text-xl max-w-2xl mx-auto">
+        <BlurReveal class="space-y-6 text-xl max-w-2xl mx-auto" whileInView>
           <div class="flex items-center gap-3">
             <span>-</span>
             <span>Create <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">web app products</TextHighlight> independently <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">within the year</TextHighlight></span>
@@ -333,6 +350,22 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
             <span>and <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">graduate, eyy 🤙</TextHighlight></span>
           </div>
         </BlurReveal>
+      </div>
+    </div>
+
+    <!-- Picture Gallery Section -->
+    <div class="py-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-background/80 relative">
+      <HyperText
+        text="Picture Gallery"
+        class="text-4xl font-bold mb-16"
+        :duration="2000"
+      />
+      
+      <div class="container mx-auto px-4">
+        <ExpandableGallery
+          :images="galleryImages"
+          class="p-4"
+        />
       </div>
     </div>
 
