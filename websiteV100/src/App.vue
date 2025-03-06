@@ -438,34 +438,27 @@ onUnmounted(() => {
           <p class="mx-auto mb-10 max-w-3xl text-xl text-neutral-500 md:text-3xl dark:text-neutral-400">
             Links to my 
             <LinkPreview
-              url="https://tailwindcss.com"
+              url="https://github.com/apcciesguerra"
               class="font-bold"
             >
-              Tailwind CSS
+              <span
+                class="bg-gradient-to-br from-indigo-500 to-purple-500 bg-clip-text font-bold text-transparent"
+              >
+                GitHub
+              </span>
             </LinkPreview>
             and
             <LinkPreview
-              url="https://motion.unovue.com/"
+              url="https://www.linkedin.com/in/christian-esguerra-bscs/"
               class="font-bold"
-            >
-              motion-v
-            </LinkPreview>
-            are a great way to build modern websites.
-          </p>
-          <p class="mx-auto max-w-3xl text-xl text-neutral-500 md:text-3xl dark:text-neutral-400">
-            Visit
-            <LinkPreview
-              url="https://inspira-ui.com"
-              :width="400"
-              :height="200"
             >
               <span
                 class="bg-gradient-to-br from-purple-500 to-pink-500 bg-clip-text font-bold text-transparent"
               >
-                Inspira UI
+                LinkedIn
               </span>
             </LinkPreview>
-            for more cool components
+            if you wanna check those out
           </p>
         </div>
       </div>
