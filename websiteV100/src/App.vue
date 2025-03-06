@@ -696,32 +696,31 @@ async function submitFeedback() {
                 ✕
               </button>
             </div>
-            
             <!-- Guestbook Content -->
             <div class="overflow-y-auto p-6 flex-1">
               <div v-if="isLoadingComments" class="flex justify-center py-12">
                 <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
               </div>
               
-              <div v-else-if="comments.length === 0" class="text-center py-12 text-gray-400">
+              <div v-else-if="comments.length === 0" class="text-center py-12 text-gray-400 text-xl">
                 No comments yet. Be the first to leave feedback!
               </div>
               
-              <div v-else class="space-y-6">
+              <div v-else class="space-y-8">
                 <div 
                   v-for="comment in comments" 
                   :key="comment.id" 
-                  class="p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300"
+                  class="p-6 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 transition-all duration-300 flex flex-col items-center text-center"
                 >
-                  <div class="flex justify-between items-start">
-                    <h4 class="font-bold text-lg bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
-                      {{ comment.name }}
-                    </h4>
-                    <span class="text-xs text-gray-400">
-                      {{ formatDate(comment.created_at) }}
-                    </span>
-                  </div>
-                  <p class="mt-2 text-white/90 dark:text-white/80">{{ comment.comments }}</p>
+                  <h4 class="font-bold text-2xl bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent mb-2">
+                    {{ comment.name }}
+                  </h4>
+                  <p class="mt-4 text-white/90 dark:text-white/80 text-xl leading-relaxed max-w-2xl">
+                    {{ comment.comments }}
+                  </p>
+                  <span class="mt-4 text-base font-medium text-gray-400">
+                    {{ formatDate(comment.created_at) }}
+                  </span>
                 </div>
               </div>
             </div>
