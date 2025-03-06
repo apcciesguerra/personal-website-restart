@@ -87,19 +87,19 @@ const data = [
 
 // Timeline content
 const timelineHeadings = [
-  "Started Learning Programming",
-  "First Web Development Project",
-  "Began College Journey",
-  "Expanded Technical Skills",
-  "Future Goals"
+  "Discovered Programming",
+  "Graduated Junior High School",
+  "IT Bootcamp in Senior High School",
+  "Graduated Senior Highschool",
+  "Present Day!"
 ];
 
 const timelineDescriptions = [
-  "My first introduction to programming with basic HTML and CSS. Started building simple websites and discovered my passion for coding.",
-  "Created my first complete web project using JavaScript and began exploring frameworks. Started understanding the fundamentals of web development.",
-  "Enrolled in Computer Science program and deepened my knowledge of programming concepts, data structures, and algorithms.",
-  "Expanded my skillset with Vue.js, Python, and database technologies. Started working on more complex projects and applications.",
-  "Planning to graduate and launch my career as a full-stack developer with expertise in modern web technologies and frameworks."
+  "First introduction to coding via HTML in 7th Grade",
+  "Learned basics of HTML & CSS for 4 years (7th-10th Grade)",
+  "Decided to go to a IT related bootcamp at end of Senior High",
+  "Finished Senior High with more knowledge in coding",
+  "Currently in my 2nd year in Computer Science"
 ];
 
 useIntersectionObserver(introSection, ([{ isIntersecting }]) => {
