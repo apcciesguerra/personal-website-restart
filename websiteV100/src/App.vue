@@ -168,7 +168,7 @@ onUnmounted(() => {
       >
         <h1 class="text-balance text-center text-4xl font-bold">
              Hi, I'm
-          <TextHighlight class="bg-gradient-to-r from-green-300 to-purple-300">
+          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">
             Christian
           </TextHighlight>
             Luis Esguerra, <br>
