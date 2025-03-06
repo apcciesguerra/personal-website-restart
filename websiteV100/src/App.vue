@@ -643,14 +643,17 @@ async function submitFeedback() {
           </p>
         </div>
 
+    <!-- Footer with hidden text -->
+      <div class="py-16 flex items-center justify-center relative z-10">
         <div class="flex h-auto items-center justify-center max-lg:w-full min-md:flex-1">
           <TextHoverEffect
             class="w-[200%] min-lg:min-h-64"
             text="vercel"
           />
         </div>
-
       </div>
+    </div>
+
     </div>
   </main>
 </template>
