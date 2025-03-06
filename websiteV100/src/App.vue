@@ -253,98 +253,122 @@ async function submitFeedback() {
     </div>
     
     <!-- Timeline Section -->
-    <div class="h-fit w-full relative z-10 py-20">
-      <Timeline
-        :items="data"
-      >
-      <template
-          v-for="(item, index) in data"
-          :key="item.id + 'template'"
-          #[item.id]
+    <div class="py-32 min-h-screen flex flex-col items-center justify-center relative z-10">
+      <HyperText
+        text="My Journey"
+        class="text-5xl font-bold mb-24"
+        :duration="2000"
+      />
+      
+      <div class="container mx-auto px-4">
+        <Timeline
+          :items="data"
+          class="shadow-lg"
         >
-          <div class="relative w-full pl-20 pr-4 md:pl-4">
-            <h3
-              class="mb-4 block text-left text-2xl font-bold text-neutral-500 dark:text-neutral-500"
-            >
-              {{ timelineHeadings[index] }}
-            </h3>
-          </div>
-          <p class="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            {{ timelineDescriptions[index] }}
-          </p>
-        </template>
-      </Timeline>
+          <template
+            v-for="(item, index) in data"
+            :key="item.id + 'template'"
+            #[item.id]
+          >
+            <div class="relative w-full pl-20 pr-4 md:pl-8">
+              <h3
+                class="mb-6 block text-left text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
+              >
+                {{ timelineHeadings[index] }}
+              </h3>
+              <div class="backdrop-blur-sm bg-white/5 dark:bg-black/10 p-5 rounded-lg shadow-md hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-y-[-5px]">
+                <p class="text-neutral-800 dark:text-neutral-200 text-sm md:text-lg font-normal leading-relaxed">
+                  {{ timelineDescriptions[index] }}
+                </p>
+              </div>
+            </div>
+          </template>
+        </Timeline>
+      </div>
     </div>
     
     <!-- HyperText and Orbit Section -->
-    <div class="py-20 flex flex-col items-center justify-center space-y-12 relative z-10">
+    <div class="py-32 min-h-screen flex flex-col items-center justify-center space-y-12 relative z-10">
       <HyperText
         text="IT Experience"
-        class="text-4xl font-bold"
+        class="text-5xl font-bold mb-24"
         :duration="2000"
       />
       
       <div
-        class="relative flex h-[500px] w-full max-w-3xl mx-auto flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl"
+        class="relative flex h-[700px] w-full max-w-5xl mx-auto flex-col items-center justify-center overflow-visible rounded-xl backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-500 shadow-lg"
       >
-        <span class="pointer-events-none text-center text-8xl font-semibold leading-none"> ☀️ </span>
+        <span class="pointer-events-none text-center text-9xl font-semibold leading-none bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-pulse"> ☀️ </span>
         <!-- Inner Circles -->
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
           :duration="20"
           :delay="20"
-          :radius="80"
+          :radius="120"
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <HtmlIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <HtmlIcon />
+          </div>
         </Orbit>
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
           :duration="20"
           :delay="10"
-          :radius="80"
+          :radius="120"
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <CssIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <CssIcon />
+          </div>
         </Orbit>
         <!-- Outer Circles (reverse) -->
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
-          :radius="205"
-          :duration="20"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
+          :radius="280"
+          :duration="25"
           path
         >
-          <JavaScriptIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <JavaScriptIcon />
+          </div>
         </Orbit>
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
-          :radius="250"
-          :duration="20"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
+          :radius="320"
+          :duration="30"
           :delay="15"
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <PythonIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <PythonIcon />
+          </div>
         </Orbit>
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
-          :radius="160"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
+          :radius="230"
           :delay="4"
+          :duration="22"
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <MySqlIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <MySqlIcon />
+          </div>
         </Orbit>
         <Orbit
-          class="size-[50px] items-center justify-center border-none bg-transparent"
-          :radius="120"
-          :duration="15"
+          class="size-[60px] items-center justify-center border-none bg-transparent"
+          :radius="180"
+          :duration="18"
           :delay="10"
           path
         >
-          <VueIcon />
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+            <VueIcon />
+          </div>
         </Orbit>
       </div>
     </div>
@@ -420,6 +444,17 @@ async function submitFeedback() {
               /> 
               hours played
             </p>
+            <div class="space-y-8 mt-12">
+            <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
+              osu!
+              <NumberTicker
+                :value="738"
+                class="text-5xl font-bold"
+                :duration="2000"
+                :decimalPlaces="0"
+              /> 
+              hours played
+            </p>
             <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
               Deadlock
               <NumberTicker
@@ -433,6 +468,7 @@ async function submitFeedback() {
           </div>
         </div>
       </div>
+    </div>
     </div>
     
     <!-- Goals Section -->
