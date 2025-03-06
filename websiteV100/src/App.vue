@@ -5,6 +5,7 @@ import ParticlesBg from './components/ParticlesBg.vue'
 import TextHighlight from './components/TextHighlight.vue'
 import Timeline from './components/Timeline.vue'
 import HyperText from './components/HyperText.vue'
+import NumberTicker from './components/NumberTicker.vue'
 
 import Orbit from './components/Orbit.vue'
 import { ORBIT_DIRECTION } from './index'
@@ -225,30 +226,33 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
         </div>
         
         <div class="space-y-4 mt-8">
-          <p class="text-lg">
+          <p class="text-lg flex items-center justify-center gap-2">
             Counter-Strike       
-            <HyperText
-            text="3270"
-            class="text-4xl font-bold mb-16"
-            :duration="1500"
-            /> 
-          hours played
-          </p>
-          <p class="text-lg">
-            Valorant 
-            <HyperText
-            text="985"
-            class="text-4xl font-bold mb-16"
-            :duration="1500"
+            <NumberTicker
+              :value="3270"
+              class="text-4xl font-bold"
+              :duration="2000"
+              :decimalPlaces="0"
             /> 
             hours played
           </p>
-          <p class="text-lg">
+          <p class="text-lg flex items-center justify-center gap-2">
+            Valorant 
+            <NumberTicker
+              :value="985"
+              class="text-4xl font-bold"
+              :duration="2000"
+              :decimalPlaces="0"
+            /> 
+            hours played
+          </p>
+          <p class="text-lg flex items-center justify-center gap-2">
             Aimlabs 
-            <HyperText
-            text="525"
-            class="text-4xl font-bold mb-16"
-            :duration="1500"
+            <NumberTicker
+              :value="525"
+              class="text-4xl font-bold"
+              :duration="2000"
+              :decimalPlaces="0"
             /> 
             hours played
           </p>
@@ -263,21 +267,23 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
           </p>
           
           <div class="space-y-4 mt-8">
-            <p class="text-lg">
+            <p class="text-lg flex items-center justify-center gap-2">
               Team Fortress 2 
-              <HyperText
-              text="1011"
-              class="text-4xl font-bold mb-16"
-              :duration="1500"
+              <NumberTicker
+                :value="1011"
+                class="text-4xl font-bold"
+                :duration="2000"
+                :decimalPlaces="0"
               /> 
               hours played
             </p>
-            <p class="text-lg">
+            <p class="text-lg flex items-center justify-center gap-2">
               Deadlock
-              <HyperText
-              text="269"
-              class="text-4xl font-bold mb-16"
-              :duration="1500"
+              <NumberTicker
+                :value="269"
+                class="text-4xl font-bold"
+                :duration="2000"
+                :decimalPlaces="0"
               /> 
               hours played
             </p>
