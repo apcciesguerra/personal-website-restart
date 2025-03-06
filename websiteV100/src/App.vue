@@ -6,6 +6,7 @@ import TextHighlight from './components/TextHighlight.vue'
 import Timeline from './components/Timeline.vue'
 import HyperText from './components/HyperText.vue'
 import NumberTicker from './components/NumberTicker.vue'
+import BlurReveal from './components/BlurReveal.vue'
 
 import Orbit from './components/Orbit.vue'
 import { ORBIT_DIRECTION } from './index'
@@ -301,34 +302,37 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
       />
       
       <div class="container mx-auto px-4">
-        <!-- Content placeholder for future goals components -->
-        <div class="h-[400px] border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
-          <p class="text-foreground/50">Goals content will be placed here</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gallery Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center">
-      <HyperText
-        text="Gallery"
-        class="text-4xl font-bold mb-16"
-        :duration="2000"
-      />
-      
-      <div class="container mx-auto px-4">
-        <!-- Content placeholder for future gallery components -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
-            <p class="text-foreground/50">Image 1</p>
+        <BlurReveal class="space-y-6 text-xl max-w-2xl mx-auto">
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>Create <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">web app products</TextHighlight> independently <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">within the year</TextHighlight></span>
           </div>
-          <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
-            <p class="text-foreground/50">Image 2</p>
+          
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">C++</TextHighlight></span>
           </div>
-          <div class="aspect-square border border-dashed border-foreground/20 rounded-lg flex items-center justify-center">
-            <p class="text-foreground/50">Image 3</p>
+          
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">GameDev</TextHighlight></span>
           </div>
-        </div>
+          
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>Study and practice coding</span>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>Stay consistent with the <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">gym</TextHighlight></span>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <span>-</span>
+            <span>and <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">graduate, eyy 🤙</TextHighlight></span>
+          </div>
+        </BlurReveal>
       </div>
     </div>
 
