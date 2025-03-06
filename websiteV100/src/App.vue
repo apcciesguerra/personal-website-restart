@@ -11,6 +11,7 @@ import ExpandableGallery from './components/ExpandableGallery.vue'
 import VanishingInput from './components/VanishingInput.vue'
 import RotatingPlaceholderInput from './components/RotatingPlaceholderInput.vue'
 import LinkPreview from './components/LinkPreview.vue'
+import TextHoverEffect from './components/TextHoverEffect.vue'
 import { supabase } from './lib/supabase'
 
 // Import images from assets folder
@@ -296,9 +297,9 @@ async function submitFeedback() {
       />
       
       <div
-        class="relative flex h-[700px] w-full max-w-5xl mx-auto flex-col items-center justify-center overflow-visible rounded-xl backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-500 shadow-lg"
+        class="relative flex h-[700px] w-full max-w-5xl mx-auto flex-col items-center justify-center overflow-visible rounded-xl backdrop-blur-sm bg-white/5 dark:bg-black/10 transition-all duration-500 shadow-lg"
       >
-        <span class="pointer-events-none text-center text-9xl font-semibold leading-none bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-pulse"> ☀️ </span>
+        <span class="pointer-events-none text-center text-9xl font-semibold leading-none"> ☀️ </span>
         <!-- Inner Circles -->
         <Orbit
           class="size-[60px] items-center justify-center border-none bg-transparent"
@@ -308,7 +309,7 @@ async function submitFeedback() {
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <HtmlIcon />
           </div>
         </Orbit>
@@ -320,7 +321,7 @@ async function submitFeedback() {
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <CssIcon />
           </div>
         </Orbit>
@@ -331,7 +332,7 @@ async function submitFeedback() {
           :duration="25"
           path
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <JavaScriptIcon />
           </div>
         </Orbit>
@@ -343,7 +344,7 @@ async function submitFeedback() {
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <PythonIcon />
           </div>
         </Orbit>
@@ -355,7 +356,7 @@ async function submitFeedback() {
           path
           :direction="ORBIT_DIRECTION.CounterClockwise"
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <MySqlIcon />
           </div>
         </Orbit>
@@ -366,7 +367,7 @@ async function submitFeedback() {
           :delay="10"
           path
         >
-          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
+          <div class="p-3 rounded-full backdrop-blur-sm bg-white/10 dark:bg-black/20 shadow-md transition-all duration-300">
             <VueIcon />
           </div>
         </Orbit>
@@ -603,6 +604,14 @@ async function submitFeedback() {
             if you wanna check those out
           </p>
         </div>
+
+        <div class="flex h-auto items-center justify-center max-lg:w-full min-md:flex-1">
+          <TextHoverEffect
+            class="w-[90%] min-lg:min-h-64"
+            text="INSPIRA"
+          />
+        </div>
+
       </div>
     </div>
   </main>
