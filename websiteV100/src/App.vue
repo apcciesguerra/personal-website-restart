@@ -183,12 +183,12 @@ function formatDate(dateString) {
     year: 'numeric'
   }).format(date);
 }
-
 // Fetch comments from Supabase
 async function fetchComments() {
   isLoadingComments.value = true;
   
   try {
+    console.log('Fetching comments from Supabase...');
     const { data, error } = await supabase
       .from('comments')
       .select('*')
@@ -199,14 +199,14 @@ async function fetchComments() {
       throw error;
     }
     
-    comments.value = data;
+    console.log('Comments fetched successfully:', data);
+    comments.value = data || [];
   } catch (error) {
-    console.error('Failed to fetch comments:', error);
+    console.error('Failed to fetch comments:', error.message || error);
   } finally {
     isLoadingComments.value = false;
   }
 }
-
 // Function to submit feedback to Supabase
 async function submitFeedback() {
   if (isSubmitting.value) return;
@@ -663,13 +663,11 @@ async function submitFeedback() {
               </div>
             </div>
           </form>
-        </div>
-        
-        <!-- Guestbook Button - Add this -->
-        <div class="mt-16 flex justify-center">
+         
+          <!-- Guestbook Button -->
           <button 
             @click="toggleGuestbook" 
-            class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300 shadow-md flex items-center gap-2"
+            class="mt-12 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300 shadow-md flex items-center gap-2"
           >
             <span class="text-xl">✍️</span>
             <span>View Guestbook</span>
@@ -759,16 +757,16 @@ async function submitFeedback() {
           </p>
         </div>
 
-    <!-- Footer with hidden text -->
-      <div class="py-16 flex items-center justify-center relative z-10">
-        <div class="flex h-auto items-center justify-center max-lg:w-full min-md:flex-1">
-          <TextHoverEffect
-            class="w-[200%] min-lg:min-h-64"
-            text="vercel"
-          />
+        <!-- Footer with hidden text -->
+        <div class="py-16 flex items-center justify-center relative z-10">
+          <div class="flex h-auto items-center justify-center max-lg:w-full min-md:flex-1">
+            <TextHoverEffect
+              class="w-[200%] min-lg:min-h-64"
+              text="vercel"
+            />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </main>
 </template>
