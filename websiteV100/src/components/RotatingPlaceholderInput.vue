@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, defineProps, withDefaults } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // Define interfaces for props
 interface Props {
@@ -52,16 +52,18 @@ const inputRef = ref<HTMLInputElement | null>(null);
 const currentPlaceholder = ref<number>(0);
 const intervalRef = ref<number | null>(null);
 
-// props
+// props - no need to import defineProps or withDefaults
 const props = withDefaults(defineProps<Props>(), {
   placeholders: () => ["Placeholder 1", "Placeholder 2", "Placeholder 3"],
 });
 
 // Focus on input when mounted
+// Remove or comment out the auto-focus code
 onMounted(() => {
-  if (inputRef.value) {
-    inputRef.value.focus();
-  }
+  // Auto-focus removed to prevent page scrolling to this element
+  
+  changePlaceholder();
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 });
 
 function changePlaceholder(): void {
@@ -78,11 +80,6 @@ function handleVisibilityChange(): void {
     changePlaceholder();
   }
 }
-
-onMounted(() => {
-  changePlaceholder();
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-});
 
 onBeforeUnmount(() => {
   if (intervalRef.value) {

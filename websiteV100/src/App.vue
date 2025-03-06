@@ -21,22 +21,18 @@ import photo5 from './assets/images/photo5.jpg'
 // Last page text input
 const lastPageText = ref("");
 const visitorName = ref("");
+const currentNamePlaceholder = ref(0);
 const namePlaceholders = [
   "Your awesome name here",
   "John Doe",
-  "Future tech innovator",
-  "Digital explorer",
-  "Pixel perfectionist",
-  "Web wanderer",
-  "Curious visitor",
-  "Fellow developer"
+  "Mary Poppins",
+  "Jamal Palconan",
 ];
 const lastPagePlaceholders = [
-  "Why is my code always broken?",
-  "What does 'undefined' even mean?",
-  "How to center a div (for real this time)",
-  "Am I smarter than a compiler?",
-  "Do loops ever get dizzy?",
+  "I like your website!",
+  "Nah, it's ugly dude.",
+  "Cool site!",
+  "Amogus",
 ];
 
 import Orbit from './components/Orbit.vue'
@@ -104,7 +100,8 @@ useIntersectionObserver(aboutMeSection, ([{ isIntersecting }]) => {
 let nameIntervalId: number | null = null;
 
 onMounted(() => {
-  // Ensure the page starts at the top when loaded
+  // Force scroll to top on page load
+  window.history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
   
   // Start rotating name placeholders
@@ -153,7 +150,7 @@ onUnmounted(() => {
       >
         <h1 class="text-balance text-center text-4xl font-bold">
              Hi, I'm
-          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">
+          <TextHighlight class="bg-gradient-to-r from-green-300 to-purple-300">
             Christian
           </TextHighlight>
             Luis Esguerra, <br>
