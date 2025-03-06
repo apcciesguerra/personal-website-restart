@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useColorMode, useIntersectionObserver } from '@vueuse/core'
 import ParticlesBg from './components/ParticlesBg.vue'
 import TextHighlight from './components/TextHighlight.vue'
@@ -204,9 +204,9 @@ async function submitFeedback() {
     <!-- Particles background that spans the entire page -->
     <ParticlesBg
       class="fixed inset-0 z-0"
-      :quantity="100"
+      :quantity="150"
       :ease="100"
-      :color="isDark ? '#FFF' : '#000'"
+      :color="isDark ? '#FFF' : '#000'"  
       :staticity="10"
     />
     
@@ -220,30 +220,34 @@ async function submitFeedback() {
         Welcome To My Website
       </span>
     </div>
-
+    
     <!-- Introduction Section -->
     <div
       ref="introSection"
       class="relative flex min-h-screen w-full flex-col items-center justify-center z-10"
     >
       <div 
-        class="transition-all duration-1000"
+        class="transition-all duration-1000 max-w-4xl mx-auto px-6"
         :class="isIntroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
       >
-        <h1 class="text-balance text-center text-4xl font-bold">
-             Hi, I'm
-          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">
+        <h1 class="text-balance text-center text-5xl md:text-6xl font-bold leading-relaxed">
+          Hi, I'm 
+          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
             Christian
           </TextHighlight>
-            Luis Esguerra, <br>
-            a
-          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">
-           2nd Year College Student
-          </TextHighlight><br>
+          Luis Esguerra
+          <div class="my-6">
+            a 
+            <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
+              2nd Year College Student
+            </TextHighlight>
+          </div>
+          <div class="my-6">
             currently studying BS
-          <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">
-            Computer Science
-          </TextHighlight>
+            <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300 px-2 py-1">
+              Computer Science
+            </TextHighlight>
+          </div>
         </h1>
       </div>
     </div>
@@ -271,7 +275,7 @@ async function submitFeedback() {
         </template>
       </Timeline>
     </div>
-
+    
     <!-- HyperText and Orbit Section -->
     <div class="py-20 flex flex-col items-center justify-center space-y-12 relative z-10">
       <HyperText
@@ -344,52 +348,52 @@ async function submitFeedback() {
         </Orbit>
       </div>
     </div>
-
+    
     <!-- More About Me Section -->
-    <div ref="aboutMeSection" class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
+    <div ref="aboutMeSection" class="py-32 min-h-screen flex flex-col items-center justify-center relative z-10">
       <HyperText
         text="More About Me"
-        class="text-4xl font-bold mb-16"
+        class="text-5xl font-bold mb-24"
         :duration="2000"
       />
       
-      <div class="text-center max-w-2xl mx-auto space-y-12">
-        <div class="text-xl">
+      <div class="text-center max-w-3xl mx-auto space-y-16">
+        <div class="text-2xl leading-relaxed p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
           I used to play video games a lot.
           <br/>
           Like, <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">a lot</TextHighlight>.
         </div>
         
-        <div class="text-xl mt-8">
+        <div class="text-2xl leading-relaxed p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
           There was even a time I chased being an eSports Professional
         </div>
         
-        <div class="space-y-4 mt-8">
-          <p class="text-lg flex items-center justify-center gap-2">
+        <div class="space-y-8 mt-12">
+          <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
             Counter-Strike       
             <NumberTicker
               :value="3270"
-              class="text-4xl font-bold"
+              class="text-5xl font-bold"
               :duration="2000"
               :decimalPlaces="0"
             /> 
             hours played
           </p>
-          <p class="text-lg flex items-center justify-center gap-2">
+          <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
             Valorant 
             <NumberTicker
               :value="985"
-              class="text-4xl font-bold"
+              class="text-5xl font-bold"
               :duration="2000"
               :decimalPlaces="0"
             /> 
             hours played
           </p>
-          <p class="text-lg flex items-center justify-center gap-2">
+          <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
             Aimlabs 
             <NumberTicker
               :value="525"
-              class="text-4xl font-bold"
+              class="text-5xl font-bold"
               :duration="2000"
               :decimalPlaces="0"
             /> 
@@ -398,29 +402,29 @@ async function submitFeedback() {
         </div>
         
         <div 
-          class="mt-16 transition-all duration-1000 transform"
+          class="mt-24 transition-all duration-1000 transform"
           :class="isAboutMeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
         >
-          <p class="text-xl">
+          <p class="text-2xl leading-relaxed p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
             Nowadays, I'm just <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">pretty chill</TextHighlight> and play games for <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">fun</TextHighlight>
           </p>
           
-          <div class="space-y-4 mt-8">
-            <p class="text-lg flex items-center justify-center gap-2">
+          <div class="space-y-8 mt-12">
+            <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
               Team Fortress 2 
               <NumberTicker
                 :value="1011"
-                class="text-4xl font-bold"
+                class="text-5xl font-bold"
                 :duration="2000"
                 :decimalPlaces="0"
               /> 
               hours played
             </p>
-            <p class="text-lg flex items-center justify-center gap-2">
+            <p class="text-xl flex items-center justify-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300">
               Deadlock
               <NumberTicker
                 :value="269"
-                class="text-4xl font-bold"
+                class="text-5xl font-bold"
                 :duration="2000"
                 :decimalPlaces="0"
               /> 
@@ -430,50 +434,50 @@ async function submitFeedback() {
         </div>
       </div>
     </div>
-
+    
     <!-- Goals Section -->
-    <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
-      <HyperText
-        text="Goals"
-        class="text-4xl font-bold mb-16"
-        :duration="2000"
-      />
-      
-      <div class="container mx-auto px-4">
-        <BlurReveal class="space-y-6 text-xl max-w-2xl mx-auto" whileInView>
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>Create <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">web app products</TextHighlight> independently <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">within the year</TextHighlight></span>
-          </div>
+        <div class="py-32 min-h-screen flex flex-col items-center justify-center relative z-10">
+          <HyperText
+            text="Goals"
+            class="text-5xl font-bold mb-24"
+            :duration="2000"
+          />
           
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">C++</TextHighlight></span>
+          <div class="container mx-auto px-4">
+            <BlurReveal class="space-y-10 text-2xl max-w-3xl mx-auto" whileInView>
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>Create <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">web app products</TextHighlight> independently <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">within the year</TextHighlight></span>
+              </div>
+              
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">C++</TextHighlight></span>
+              </div>
+              
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">GameDev</TextHighlight></span>
+              </div>
+              
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>Study and practice coding</span>
+              </div>
+              
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>Stay consistent with the <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">gym</TextHighlight></span>
+              </div>
+              
+              <div class="flex items-center gap-4 p-4 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-black/10 hover:bg-white/10 dark:hover:bg-black/20 transition-all duration-300 transform hover:translate-x-2">
+                <span class="text-3xl text-indigo-400">→</span>
+                <span>and <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">graduate, eyy 🤙</TextHighlight></span>
+              </div>
+            </BlurReveal>
           </div>
-          
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>Learn <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">GameDev</TextHighlight></span>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>Study and practice coding</span>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>Stay consistent with the <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">gym</TextHighlight></span>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <span>-</span>
-            <span>and <TextHighlight class="bg-gradient-to-r from-indigo-300 to-purple-300">graduate, eyy 🤙</TextHighlight></span>
-          </div>
-        </BlurReveal>
-      </div>
-    </div>
-
+        </div>
+    
     <!-- Picture Gallery Section -->
     <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <HyperText
@@ -489,7 +493,7 @@ async function submitFeedback() {
         />
       </div>
     </div>
-
+    
     <!-- Last Page Section -->
     <div class="py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
       <div class="container mx-auto px-4 max-w-3xl">

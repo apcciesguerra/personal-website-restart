@@ -48,9 +48,9 @@ interface Props {
 <template>
   <div
     ref="timelineContainerRef"
-    class="w-full bg-white font-sans md:px-10 dark:bg-neutral-950"
+    class="w-full font-sans md:px-10 backdrop-blur-sm bg-white/5 dark:bg-black/5 rounded-xl"
   >
-    <div class="mx-auto max-w-7xl px-4 py-20 lg:px-10 md:px-8">
+    <div class="mx-auto max-w-7xl px-4 py-12 lg:px-10 md:px-8">
       <h2 class="mb-4 max-w-4xl text-lg text-black md:text-4xl dark:text-white">
         {{ title }}
       </h2>
@@ -72,14 +72,14 @@ interface Props {
           class="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full"
         >
           <div
-            class="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center"
+            class="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur-sm flex items-center justify-center"
           >
             <div
-              class="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2"
+              class="h-4 w-4 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 border border-indigo-400 dark:border-purple-400 p-2"
             />
           </div>
           <h3
-            class="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500 dark:text-neutral-500"
+            class="hidden md:block text-xl md:pl-20 md:text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
           >
             {{ item.label }}
           </h3>
@@ -98,24 +98,7 @@ interface Props {
             height: heightTransform,
             opacity: opacityTransform,
           }"
-          class="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-purple-500 from-0% via-blue-500 via-10% to-transparent"
-        >
-        </Motion>
-      </div>
-      
-      <div
-        :style="{
-          height: height + 'px',
-        }"
-        class="absolute left-8 top-0 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] md:left-8 dark:via-neutral-700"
-      >
-        <Motion
-          as="div"
-          :style="{
-            height: heightTransform,
-            opacity: opacityTransform,
-          }"
-          class="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-purple-500 from-0% via-blue-500 via-10% to-transparent"
+          class="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-r from-indigo-500 from-0% via-purple-500 via-50% to-transparent"
         >
         </Motion>
       </div>
